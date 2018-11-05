@@ -1,17 +1,52 @@
-// import React, { Component } from 'react';
-// import City from './city.jsx';
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import City from "../containers/city";
 
-// const ActiveCity = (props) => {
+import { setCity } from "../actions";
 
-//   const src = `https://kitt.lewagon.com/placeholder/cities/${props.selectedCity.slug}`;
+class ActiveCity extends Component {
 
-//   return (
-//     <div className="active-city">
-//       <h3> {props.selectedCity.name}</h3>
-//       <p> {props.selectedCity.address}</p>
-//       <img src={src} width="100%"/>
-//     </div>
-//   );
-// };
+  // componentWillMount() {
+  //   this.props.setCity();
+  // }
 
-// export default ActiveCity;
+  render() {
+
+    if (!this.props.activeCity) {
+      return (
+        <div className="active-city">
+          <p>Select a city...</p>
+        </div>
+      );
+    }
+
+    else {
+      console.log(this.props.activeCity)
+      const src = `https://kitt.lewagon.com/placeholder/cities/${this.props.activeCity.slug}`;
+      return (
+        <div className="active-city">
+          <h3> {this.props.activeCity.name}</h3>
+          <p> {this.props.activeCity.address}</p>
+          <img src={src} width="100%"/>
+        </div>
+      );
+    }
+  };
+}
+
+function mapStateToProps(state) {
+  return {
+    activeCity: state.activeCity
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+ return bindActionCreators(
+ { setCity },
+ dispatch
+ );
+}
+
+// export default FlatList;
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveCity);

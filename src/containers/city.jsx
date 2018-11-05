@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import { setCity } from "../actions";
+
 
 class City extends Component {
 
-  // handleMouseClick = () => {
-  //     this.props.selectCity(this.props.index);
-  //     // console.log(this.props.index)
-  // }
+  handleMouseClick = () => {
+      this.props.setCity(this.props);
+      // console.log(this.props.slug)
+  }
 
   render() {
     return (
-          <div className="list-group-item">
+          <div className="list-group-item" onClick={this.handleMouseClick}>
             {this.props.name}
           </div>
       );
   }
-}
+};
 
-export default City;
+  function mapStateToProps(state) {
+    return {
+      activeCity: state.activeCity
+    };
+  }
+
+  function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { setCity },
+    dispatch
+    );
+  }
+
+export default connect(mapStateToProps, mapDispatchToProps)(City);

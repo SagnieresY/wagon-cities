@@ -9,11 +9,11 @@ import '../assets/stylesheets/application.scss';
 
 // Reducers
 import citiesReducer from "./reducers/cities_reducer";
-// import selectedFlatReducer from "./reducers/selected_flat_reducer";
+import activeCityReducer from "./reducers/active_city_reducer";
 
 const reducers = combineReducers({
   cities: citiesReducer,
-  // selectedFlat: selectedFlatReducer
+  activeCity: activeCityReducer
 });
 
 // render an instance of the component in the DOM

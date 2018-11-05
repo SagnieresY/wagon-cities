@@ -8,9 +8,9 @@ export function setCities() {
   };
 }
 
-// export function selectFlat(flat) {
-//   return {
-//     type: "SELECT_FLAT",
-//     payload: flat
-//   };
-// }
+export function setCity(city) {
+  return {
+    type: "SET_CITY",
+    payload: city
+  };
+}
